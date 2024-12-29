@@ -1,0 +1,32 @@
+<div class="center-div">
+    <div class="form"  >
+        <form  [formGroup]="myform"  (ngSubmit)="onLogin()">
+            <h2>Login</h2>
+            <div class="input">
+                <div class="inputBox">
+                    <label for="">Email </label>
+                    <input type="text" formControlName="userName" class="form-control"   >
+                   @if(userData.userName.touched && userData.userName.errors?.['required']){
+                    <span class="form-label error">* Email is required</span>
+                   }
+                   
+                </div>
+                <div class="inputBox">
+                    <label for="">Password</label>
+                    <input type="password" formControlName="userPassword" name="userPassword" >
+                    @if(userData.userPassword.touched && userData.userPassword.errors?.['required']){
+                        <span class="form-label error">* Password is required</span>
+                       }
+                </div>
+                <div class="inputBox">
+                    <input type="submit" value="Sign In"> 
+                </div>
+            </div>
+            <p class="forgot">Forgot Password? <a href="#">Click Here</a></p>
+            <div class="social">
+                <button><i class="fa fa-facebook" aria-hidden="true"></i><p>Signin with Facebook</p></button>
+                <button><i class="fa fa-twitter" aria-hidden="true"></i><p>Signin with Twitter</p></button>
+            </div>
+        </form>
+    </div>
+</div>

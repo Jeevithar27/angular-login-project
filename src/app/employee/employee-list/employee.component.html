@@ -1,0 +1,55 @@
+<div class="container">
+    <br>
+    <h1>Employee List</h1>
+    <br>
+    <div class="alert alert-success" *ngIf="successMessage">
+        <strong>Success!</strong> {{successMessage}}
+    </div>
+    <div class="alert alert-warning" *ngIf="errorMessage">
+        <strong>Error!</strong> {{errorMessage}}
+    </div>
+    <br>
+
+    
+    <button (click)="createEmployee()" type="button" class="btn btn-success float-right">
+        Create
+       </button>
+       <br> <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Sno</th>
+                <th>Employee Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>View</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let emp of employees; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{emp.code}}</td>
+                <td>{{emp.name}}</td>
+                <td>{{emp.email}}</td>
+                <td>{{emp.role}}</td>
+                <td>{{!getStatusButton(emp.id)!}}</td>
+                <td> 
+                    <button (click)="viewEmployeeDetail(emp.id)" type="button" class="btn btn-sm btn-primary">
+                      View Detail
+                    </button>
+                </td>
+                <td>
+                    <button (click)="editEmployee(emp.id)" type="button" class="btn btn-sm btn-warning">
+                       Edit
+                    </button> |
+                    <button (click)="deleteEmployee(emp.id)" type="button" class="btn  btn-sm btn-danger">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

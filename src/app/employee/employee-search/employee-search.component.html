@@ -1,0 +1,49 @@
+<section class="pb-4">
+  <div class="border rounded-5">
+    <br>
+
+    <section class="w-100 p-4 pb-4 d-flex justify-content-center align-items-center flex-column">
+      <div class="col-md-12">
+        <div class="alert alert-success" *ngIf="successMessage">
+          <strong>Success!</strong> {{successMessage}}
+        </div>
+        <div class="alert alert-warning" *ngIf="errorMessage">
+          <strong>Error!</strong> {{errorMessage}}
+        </div>
+      </div>
+      <div>
+        <label class="form-label" for="form1" style="margin-left: 0px;">Search</label>
+        <div class="input-group">
+          <div class="form-outline" data-mdb-input-init="" data-mdb-input-initialized="true">
+            <input type="search" id="form1" [(ngModel)]="employeeCode" class="form-control" placeholder="Employee Code">
+          </div>
+          <div class="form-outline">
+            <button type="button" class="btn btn-primary" (click)="searchEmployee()" data-mdb-ripple-init="">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+   @if(employeeCode && employeeItem?.code){
+    <div >
+      <div class="p-4 text-center border-top mobile-hidden">
+        <app-employee-search-child [employee]="employeeItem" [employeeCode]="employeeCode" [search]="search"
+          (updateEmpId)="updateStatusId($event)"></app-employee-search-child>
+      </div>
+    </div>
+   } @else if (employeeCode  && search){
+    <div>
+      <div class="p-4 text-center border-top mobile-hidden">
+        <div class="col-md-12">No data</div>
+      </div>
+    </div>
+   
+   }
+  
+   
+  
+   
+
+  </div>
+</section>

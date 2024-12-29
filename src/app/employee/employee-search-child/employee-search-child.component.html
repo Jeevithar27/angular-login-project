@@ -1,0 +1,43 @@
+<div *ngIf="search">
+    <ng-container class="col-md-12" *ngIf="employee && employeeCode" ;else NoData>
+        <legend>{{employee.name}}'s' Details</legend>
+        <br>
+        <div class="mb-3">
+            <p class="form-label">Name : {{employee.name}}</p>
+        </div>
+        <div class="mb-3">
+            <p>Email : {{employee.email}}</p>
+        </div>
+        <div class="mb-3">
+            <p>Role : {{employee.role}}</p>
+        </div>
+        <div class="mb-3">
+            <p>Education Details : {{employee.education}}</p>
+        </div>
+        <div class="mb-3">
+            <p>Native : {{employee.native}}</p>
+        </div>
+        <div class="mb-3">
+            <p>Current Location : {{employee.current_location}}</p>
+        </div>
+        <div class="mb-3">
+            <p>Martial Status: {{employee.marial_status}}</p>
+        </div>
+        <div class="mb-3">
+            <p>Address: {{employee.Address}}</p>
+        </div>
+        
+        <div class="mb-3">
+            <p>Status
+                <select value="status" [(ngModel)]="employee.status" (ngModelChange)="statusChange()">
+                    <option value="0">Active</option>
+                    <option value="1">Inactive</option>
+                </select>
+            </p>
+            <button  [disabled]="updateButton" class="btn btn-warning" (click)="updateStatus(employee.id,employee.status)">Update Change</button>
+        </div>
+    </ng-container>
+</div>
+<ng-template class="col-md-12" #NoData>
+    <p>No data found!!!</p>
+</ng-template>

@@ -1,0 +1,27 @@
+
+<div class="col-md-12">
+        <legend>{{employee.name}}'s' Details</legend>
+        <br>
+        <div class="mb-3">
+          <p  class="form-label">Name : {{employee.name}}</p>
+        </div>
+        <div class="mb-3">
+          <p>Email : {{employee.email}}</p>
+        </div>
+        <div class="mb-3">
+            <p>Role : {{employee.role}}</p>
+        </div>
+        <div class="mb-3">
+            <p>Education Details : {{employee.education}}</p>
+        </div>
+        <div class="mb-3">
+            <p>Native : {{employee.native}}</p>
+        </div>
+        <div class="mb-3">
+            <p>Current Location : {{employee.current_location}}</p>
+        </div>
+        <div class="mb-3">
+            <p>Martial Status: {{employee.marial_status}}</p>
+        </div>
+        <button  class="btn btn-danger" (click)="backToEmployee()">Back</button>
+</div>

@@ -1,0 +1,52 @@
+<div class="container">
+    <form [formGroup]="myform">
+        <br>
+
+        <br>
+        <div class="alert alert-success" *ngIf="successMessage">
+            <strong>Success!</strong> {{successMessage}}
+        </div>
+        <div class="alert alert-warning" *ngIf="errorMessage">
+            <strong>Error!</strong> {{errorMessage}}
+        </div>
+        <div class="row">
+
+            <div class="col-md-6">
+                <h2>Employee Create </h2>
+            </div>
+            <div class="col-md-6"> <button (click)="employeeListUrl()" class="btn btn-danger float-right">Back</button> </div>
+            <br>
+            <div *ngFor="let field of  fields" class="col-md-6">
+                <div class="form-group">
+                    <label [for]="field.name">{{field.label}} <span class="error"
+                            *ngIf="field.required">*</span></label>
+                    <input *ngIf="field.type == 'text'"  appUppercase type="text" class="form-control"
+                        [placeholder]="field.placeholder" [formControlName]="field.name" [id]="field.name">
+
+                    <select *ngIf="field.type == 'dropdown'" [formControlName]="field.name" [id]="field.name"
+                        class="form-control">
+                        <option value="">Please Select</option>
+                        <option *ngFor="let list of field.option" [value]="list.id"> {{list.name}}</option>
+                    </select>
+
+                    <div [id]="field.name"
+                        *ngIf="this.myform.controls[field.name]?.invalid && (this.myform.controls[field.name]?.touched || submitted)"
+                        class="form-text">
+                        <div *ngIf="this.myform.controls[field.name]?.hasError('required')" class="error">
+                            {{field.label}} is required </div>
+                        <div *ngIf="this.myform.controls[field.name]?.hasError('email')" class="error"> Email is invalid
+                        </div>
+                        <div *ngIf="this.myform.controls[field.name]?.hasError('minlength')" class="error"> Mininum
+                            Length is {{field.minLength}}</div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <button type="submit" class="btn btn-primary float-right" (click)="saveEmployee()">Submit</button>
+    </form>
+
+
+
+</div>
