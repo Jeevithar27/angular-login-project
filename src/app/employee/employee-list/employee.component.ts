@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from '../../dependencies/employee.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { response } from 'express';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-employee',
@@ -11,14 +12,18 @@ import { response } from 'express';
   templateUrl: './employee.component.html',
   styleUrl: './employee.component.css'
 })
-export class EmployeeComponent {
+export class EmployeeComponent implements OnInit {
   employees : any;
   successMessage: string = '';
   errorMessage: string = '';
 
 
-constructor(private employeeService: EmployeeService, private router: Router){
+constructor(private employeeService: EmployeeService, private router: Router, private titleService:Title ){
   this.employees = this.loadEmployees();
+}
+
+ngOnInit(): void {
+    this.titleService.setTitle('Employee List');
 }
 
 loadEmployees() {
@@ -33,10 +38,6 @@ viewEmployeeDetail(id:any){
 
 createEmployee(){
   this.router.navigateByUrl('employee/create');
-}
-
-getStatusButton(id:number):string{
-  return this.employeeService.getStatusButton(id);
 }
 
 
@@ -62,5 +63,15 @@ deleteEmployee(id:number){
     }, 20000);
   });
 }
+
+getRole(roleId:number){
+  return this.employeeService.getRole(roleId);
+}
+
+getStatus(status:number){
+  return this.employeeService.getStatus(status);
+}
+
+
    
 }

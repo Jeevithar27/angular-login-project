@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EmployeeService, Employee } from '../../dependencies/employee.service';
 import { error } from 'console';
@@ -7,6 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { response } from 'express';
 import { UppercaseDirective } from '../../uppercase.directive';
+import { Title } from '@angular/platform-browser';
 
 
 
@@ -16,7 +17,7 @@ import { UppercaseDirective } from '../../uppercase.directive';
   templateUrl: './employee-create.component.html',
   styleUrl: './employee-create.component.css'
 })
-export class EmployeeCreateComponent {
+export class EmployeeCreateComponent implements OnInit {
   title = 'Employee create';
   employeeData: Employee | null = null;
   successMessage:string='';
@@ -26,7 +27,13 @@ export class EmployeeCreateComponent {
   fields: any = [];
 
   router = inject(Router);
-  constructor(private formBuilder: FormBuilder, private employeeService: EmployeeService,private http:HttpClient ) {
+
+  ngOnInit(): void {
+      this.titleService.setTitle('Employee Create');
+  }
+
+
+  constructor(private formBuilder: FormBuilder, private employeeService: EmployeeService,private http:HttpClient, private titleService:Title ) {
     this.myform = this.formBuilder.group({
       code: ['', Validators.required],
       name: ['', [Validators.required, Validators.minLength(2)]],
@@ -38,6 +45,8 @@ export class EmployeeCreateComponent {
       marital_status: ['', Validators.required],
       address: '',
     });
+
+  
 
     this.fields = [
       { name: "code", label: "Employee Id", placeholder: "Employee Id", minLength: 3, require: true, type: "text" },

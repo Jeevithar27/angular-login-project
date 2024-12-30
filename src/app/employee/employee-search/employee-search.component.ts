@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EmployeeService } from '../../dependencies/employee.service';
 import { EmployeeSearchChildComponent } from '../employee-search-child/employee-search-child.component';
 import { response } from 'express';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-employee-search',
@@ -12,14 +13,18 @@ import { response } from 'express';
   templateUrl: './employee-search.component.html',
   styleUrl: './employee-search.component.css'
 })
-export class EmployeeSearchComponent {
+export class EmployeeSearchComponent implements OnInit {
   employeeCode:string ='';
   employeeItem :any =[];
   search= false;
   errorMessage='';
   successMessage='';
 
-  constructor(private router:Router, private employeeService:EmployeeService){}
+  ngOnInit(): void {
+      this.titleService.setTitle('Employee Search');
+  }
+
+  constructor(private router:Router, private employeeService:EmployeeService, private titleService:Title){}
 
   searchEmployee(){ 
    

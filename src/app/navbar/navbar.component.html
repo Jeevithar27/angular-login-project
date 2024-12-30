@@ -2,6 +2,6 @@
     <li><a  [routerLink]="['/dashboard']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Dashabord</a></li>
     <li><a class="" [routerLink]="['/employee']" routerLinkActive="active"  >Employee</a></li>
     <li><a [routerLink]="['/employee-search']" routerLinkActive="active" >Search Employee</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li style="float:right"><a href="#about">Logout</a></li>
+  
+    <li style="float:right"><a href="#" (click)="logout()">Logout</a></li>
   </ul>  

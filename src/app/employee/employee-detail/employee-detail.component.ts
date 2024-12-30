@@ -14,26 +14,38 @@ import { response } from 'express';
 })
 export class EmployeeDetailComponent implements OnInit {
 
-  employee:any;
+  employee: any;
 
-  constructor(private activedRouter: ActivatedRoute,private employeeService: EmployeeService, private router: Router){
-  } 
+  constructor(private activedRouter: ActivatedRoute, private employeeService: EmployeeService, private router: Router) {
+  }
 
- ngOnInit(): void {
-     const employeeId :number|null = Number(this.activedRouter.snapshot.paramMap.get('id'));
-     if(employeeId){
-        this.employeeService.getEmployeeById(employeeId).subscribe((response:any)=>{
-          if(response.code ==200){
-            this.employee  = response.data;
-          }
-          
+  ngOnInit(): void {
+    const employeeId: number | null = Number(this.activedRouter.snapshot.paramMap.get('id'));
+    if (employeeId) {
+      this.employeeService.getEmployeeById(employeeId).subscribe((response: any) => {
+        if (response.code == 200) {
+          this.employee = response.data;
+        }
+
       });
       console.log(this.employee);
-     }
- }
+    }
+  }
 
- backToEmployee(){
+  backToEmployee() {
     this.router.navigateByUrl('/employee');
- }
+  }
+
+  getRole(roleId: number) {
+    return this.employeeService.getRole(roleId);
+  }
+
+  getStatus(status: number) {
+    return this.employeeService.getStatus(status);
+  }
+
+  getMaritalStatus(id: number) {
+    return this.employeeService.getMaritalStatus(id);
+  }
 
 }

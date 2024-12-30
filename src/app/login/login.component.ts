@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { LoginService } from '../login.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -12,22 +13,25 @@ import { LoginService } from '../login.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
 
   userData :any = {
     userName : '',
     userPassword: ''
   };
 
+ngOnInit(): void {
+    this.titleService.setTitle('Login');
+}
 
 
 
- // constructor(private http: HttpClient, private route: Router, private loginService: LoginService) {}
+
  route = inject(Router);
  http = inject(HttpClient);
 
  myform : FormGroup;
- constructor(){
+ constructor(private titleService:Title){
    this.userData.userName = new FormControl('',[Validators.required]);
    this.userData.userPassword = new FormControl('',Validators.required);
    this.myform = new FormGroup({

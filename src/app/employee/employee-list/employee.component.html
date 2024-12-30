@@ -34,8 +34,8 @@
                 <td>{{emp.code}}</td>
                 <td>{{emp.name}}</td>
                 <td>{{emp.email}}</td>
-                <td>{{emp.role}}</td>
-                <td>{{!getStatusButton(emp.id)!}}</td>
+                <td> {{getRole(emp.role)}}</td>
+                <td>  {{getStatus(emp.status) }}</td>
                 <td> 
                     <button (click)="viewEmployeeDetail(emp.id)" type="button" class="btn btn-sm btn-primary">
                       View Detail

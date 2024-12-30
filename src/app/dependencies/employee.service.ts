@@ -40,8 +40,6 @@ export class EmployeeService {
   private responseJson: any = [];
 
 
-
-
   constructor(private http: HttpClient, private router:Router) {
 
 
@@ -123,14 +121,6 @@ export class EmployeeService {
     return this.http.delete(this.url+ '?id=' + id,{headers});
   }
 
-  
-
-  getStatusButton(id: number): string {
-    this.employees.find((emp) => Number(emp.id) === id);
-    return "<span>Active</span>";
-  }
-
-
 
   getRoleList() {
     return this.roleList;
@@ -155,5 +145,23 @@ export class EmployeeService {
 
    getEmployeeBycode(code: string): any {
     return this.http.get('http://localhost/RESTAPIPHP-main/SearchEmployee.php?code='+code);
+  }
+
+
+  getRole(roleId:number){
+   const role = this.roleList.find((role)=>role.id == roleId);
+   return role?.name;
+  }
+
+  getStatus(status:number){
+    if(status == 1){
+      return "Inactive";
+    }
+    return "Active";
+  }
+
+  getMaritalStatus(id:number){
+   const list = this.relationStatusList.find((list)=>list.id==id);
+   return list?.name;
   }
 }

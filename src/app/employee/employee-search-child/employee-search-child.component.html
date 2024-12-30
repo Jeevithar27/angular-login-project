@@ -9,7 +9,7 @@
             <p>Email : {{employee.email}}</p>
         </div>
         <div class="mb-3">
-            <p>Role : {{employee.role}}</p>
+            <p>Role : {{getRole(employee.role)}}</p>
         </div>
         <div class="mb-3">
             <p>Education Details : {{employee.education}}</p>
@@ -21,12 +21,11 @@
             <p>Current Location : {{employee.current_location}}</p>
         </div>
         <div class="mb-3">
-            <p>Martial Status: {{employee.marial_status}}</p>
+            <p>Martial Status: {{getMaritalStatus(employee.marital_status)}} </p>
         </div>
-        <div class="mb-3">
-            <p>Address: {{employee.Address}}</p>
+        <div class="mb-3" *ngIf="employee.address">
+            <p>Address: {{employee.address}}</p>
         </div>
-        
         <div class="mb-3">
             <p>Status
                 <select value="status" [(ngModel)]="employee.status" (ngModelChange)="statusChange()">

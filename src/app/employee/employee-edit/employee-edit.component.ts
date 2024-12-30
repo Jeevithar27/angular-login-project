@@ -5,11 +5,12 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { response } from 'express';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
   selector: 'app-employee-edit',
-  imports: [CommonModule,FormsModule,ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './employee-edit.component.html',
   styleUrl: './employee-edit.component.css'
 })
@@ -17,8 +18,8 @@ export class EmployeeEditComponent implements OnInit {
 
   title = 'Employee create';
   employee: Employee | null = null;
-  successMessage:string='';
-  errorMessage:string='';
+  successMessage: string = '';
+  errorMessage: string = '';
   submitted: boolean = false;
   myform: FormGroup;
   fields: any = [];
@@ -26,18 +27,19 @@ export class EmployeeEditComponent implements OnInit {
   router = inject(Router);
 
   ngOnInit(): void {
-       
-        const id = Number(this.activeRoute.snapshot.paramMap.get('id'));
-        this.employeeService.getEmployeeById(id).subscribe((response:any)=>{
-          if(response.code ==200){
-            this.employee = response.data;
-            console.log(response.data);
-            this.myform.patchValue(response.data);
-          }
-        });
+    this.titleService.setTitle('Employee Edit');
+
+    const id = Number(this.activeRoute.snapshot.paramMap.get('id'));
+    this.employeeService.getEmployeeById(id).subscribe((response: any) => {
+      if (response.code == 200) {
+        this.employee = response.data;
+        console.log(response.data);
+        this.myform.patchValue(response.data);
+      }
+    });
   }
 
-  constructor(private formBuilder: FormBuilder, private employeeService: EmployeeService,private http:HttpClient, private activeRoute: ActivatedRoute  ) {
+  constructor(private formBuilder: FormBuilder, private employeeService: EmployeeService, private http: HttpClient, private activeRoute: ActivatedRoute, private titleService: Title) {
     this.myform = this.formBuilder.group({
       code: '',
       name: ['', [Validators.required, Validators.minLength(2)]],
@@ -65,22 +67,22 @@ export class EmployeeEditComponent implements OnInit {
     ];
   }
 
-  employeeListUrl (){
+  employeeListUrl() {
     return this.employeeService.employeeListUrl();
   }
 
-  updateEmployee(id:any){
+  updateEmployee(id: any) {
     console.log(this.employee);
     console.log(id);
-    this.employeeService.updateEmployee(id,this.myform.value).subscribe((response:any)=>{
-      if(response.code ==200){
+    this.employeeService.updateEmployee(id, this.myform.value).subscribe((response: any) => {
+      if (response.code == 200) {
         this.successMessage = "Employee updated successfully";
-        this.errorMessage ='';
-      }else{
-        this.errorMessage= response.message;
+        this.errorMessage = '';
+      } else {
+        this.errorMessage = response.message;
         this.successMessage = '';
       }
-      setTimeout(()=>{                        
+      setTimeout(() => {
         this.successMessage = '';
         this.errorMessage = '';
       }, 20000);
